@@ -13,10 +13,12 @@ repositories {
 }
 
 val kotestVersion: String by project
+val mordantVersion: String by project
 dependencies {
     testImplementation(kotlin("test-junit5"))
     testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
     testRuntimeOnly("io.kotest:kotest-assertions-core:$kotestVersion")
+    implementation("com.github.ajalt.mordant:mordant:$mordantVersion")
 }
 
 tasks.test {
