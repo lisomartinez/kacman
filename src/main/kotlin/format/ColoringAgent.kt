@@ -9,6 +9,8 @@ class ColoringAgent {
         return when(repository) {
             "core" -> (black on brightBlue)(repository)
             "extra" -> (black on red)(repository)
+            "multilib" -> (black on brightMagenta)(repository)
+            "community" -> (black on brightWhite)(repository)
             else -> ""
         }
 
