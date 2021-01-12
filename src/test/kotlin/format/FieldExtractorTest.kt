@@ -44,6 +44,25 @@ class FieldExtractorTest : StringSpec({
         val fields: Package = extractor.extractFields(lines)
         fields.formattedDescription(formatter) shouldBe "AWSv4 auth plugin for HTTPie"
     }
+
+    "extracts aur package name from search result lines" {
+        val lines = createAurSearchResultLines()
+        val fields: Package = extractor.extractFields(lines)
+        fields.formattedName(formatter) shouldBe "httpie-aws-authv4-git"
+    }
+
+    "extracts aur package version form search result lines" {
+        val lines = createAurSearchResultLines()
+        val fields: Package = extractor.extractFields(lines)
+        fields.formattedVersion(formatter) shouldBe "r22.6165193-1"
+    }
+
+    "extract aur package rating from search result lines" {
+        val lines = createAurSearchResultLines()
+        val fields: Package = extractor.extractFields(lines)
+        val aurFields = fields as AurPackage
+        aurFields.rating shouldBe "+0"
+    }
 })
 
 private fun createPacmanSearchResultLines(): List<String> {

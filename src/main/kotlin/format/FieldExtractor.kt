@@ -24,11 +24,13 @@ class FieldExtractor {
                 version = versionFrom(remainingOfFirstLine),
                 size = "0",
                 description = descriptionFrom(secondLine),
-                rating = "",
+                rating = ratingFrom(remainingOfFirstLine),
                 downloads = ""
             )
         }
     }
+
+    private fun ratingFrom(remainingOfFirstLine: List<String>): String = remainingOfFirstLine[2].drop(1)
 
     private fun getRemainingPartOfFirstLine(lines: List<String>) =
         lines[0].split("/")[1].split(" ")
