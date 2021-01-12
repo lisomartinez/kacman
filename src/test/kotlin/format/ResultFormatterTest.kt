@@ -53,10 +53,38 @@ class ResultFormatterTest : StringSpec({
             |Size: (863.1 KiB 2.6 MiB)
         """.trimMargin()
     }
+
+    "formats multiple packages" {
+        val formatter: ResultFormatter = ResultFormatter()
+        val result = createMultiplePacmanSearchResultLines()
+        val formattedResult: String = formatter.format(result)
+        formattedResult shouldBe """Name: ${agent.colorName("curlie")}
+            |Repository: ${agent.colorRepository("community")}
+            |Description: The power of curl, the ease of use of httpie.
+            |Version: 1.6.0-1
+            |Size: (863.1 KiB 2.6 MiB)
+            |
+            |Name: ${agent.colorName("httpie")}
+            |Repository: ${agent.colorRepository("community")}
+            |Description: cURL for humans
+            |Version: 2.3.0-3
+            |Size: (111.8 KiB 488.8 KiB)
+        """.trimMargin()
+    }
 })
 
 private fun createPacmanSearchResultLines(): String {
     return """community/curlie 1.6.0-1 (863.1 KiB 2.6 MiB) 
     The power of curl, the ease of use of httpie.
+"""
+}
+
+private fun createMultiplePacmanSearchResultLines(): String {
+    return """community/curlie 1.6.0-1 (863.1 KiB 2.6 MiB) 
+    The power of curl, the ease of use of httpie.
+
+community/httpie 2.3.0-3 (111.8 KiB 488.8 KiB) (Installed)
+    cURL for humans
+
 """
 }
