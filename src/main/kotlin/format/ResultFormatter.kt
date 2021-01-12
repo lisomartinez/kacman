@@ -1,15 +1,19 @@
 package format
 
+private const val WITH_NEW_LINE = "\n\n"
+
+private const val TWO_LINES = 2
+
 class ResultFormatter(private val formatter: FieldFormatter, private val fieldExtractor: FieldExtractor) {
 
     fun format(result: String): String {
         val packages = result.lineSequence()
-            .windowed(2, 2)
+            .windowed(TWO_LINES, TWO_LINES)
             .takeWhile(isNotLastLine())
 
         return packages
             .map { fieldExtractor.extractFields(it) }
-            .joinToString("\n\n") { formatPackage(it, formatter) }
+            .joinToString(WITH_NEW_LINE) { formatPackage(it, formatter) }
     }
 
     private fun isNotLastLine() = { list: List<String> -> list[0].isNotEmpty() && list[1].isNotEmpty() }

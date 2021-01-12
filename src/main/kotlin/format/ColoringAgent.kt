@@ -7,10 +7,10 @@ class ColoringAgent : FieldFormatter{
 
     override fun formatRepository(repository: String): String {
         return when(repository) {
-            "core" -> (black on brightBlue)(repository)
-            "extra" -> (black on red)(repository)
-            "multilib" -> (black on brightMagenta)(repository)
-            "community" -> (black on brightWhite)(repository)
+            Repositoy.CORE.asString -> (black on brightBlue)(repository)
+            Repositoy.EXTRA.asString -> (black on red)(repository)
+            Repositoy.MULTILIB.asString -> (black on brightMagenta)(repository)
+            Repositoy.COMMUNITY.asString -> (black on brightWhite)(repository)
             else -> ""
         }
 
