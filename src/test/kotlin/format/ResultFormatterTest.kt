@@ -1,6 +1,7 @@
 package format
 
 import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
 
 class ResultFormatterTest : StringSpec({
@@ -39,6 +40,18 @@ class ResultFormatterTest : StringSpec({
         val result = createPacmanSearchResultLines()
         val formattedResult: String = formatter.format(result)
         formattedResult shouldContain "Size: (863.1 KiB 2.6 MiB)"
+    }
+
+    "formats all fields of package" {
+        val formatter: ResultFormatter = ResultFormatter()
+        val result = createPacmanSearchResultLines()
+        val formattedResult: String = formatter.format(result)
+        formattedResult shouldBe """Name: ${agent.colorName("curlie")}
+            |Repository: ${agent.colorRepository("community")}
+            |Description: The power of curl, the ease of use of httpie.
+            |Version: 1.6.0-1
+            |Size: (863.1 KiB 2.6 MiB)
+        """.trimMargin()
     }
 })
 
