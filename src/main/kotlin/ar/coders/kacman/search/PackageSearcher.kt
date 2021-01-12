@@ -18,7 +18,7 @@ class PackageSearcher(private val resultFormatter: ResultFormatter, private val 
 
     private fun assertPackageNameIsPresent(packageName: String) {
         if (packageName.isBlank()) {
-            throw RuntimeException("Cannot ar.coders.kacman.search a package with an empty name")
+            throw RuntimeException("Cannot search a package with an empty name")
         }
     }
 }

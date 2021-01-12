@@ -2,7 +2,7 @@ package ar.coders.kacman.format
 
 import com.github.ajalt.mordant.terminal.TextColors.*
 
-class ColoringAgent : FieldFormatter{
+class ColorBasedFormatter : FieldFormatter {
     override fun formatName(name: String): String = (white)(name)
 
     override fun formatRepository(repository: String): String {

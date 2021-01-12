@@ -1,6 +1,6 @@
 package ar.coders.kacman.search
 
-import ar.coders.kacman.format.ColoringAgent
+import ar.coders.kacman.format.ColorBasedFormatter
 import ar.coders.kacman.format.ResultFormatter
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
@@ -10,7 +10,12 @@ class PackageSearcherTest: StringSpec({
     lateinit var packageFetcher: LocalPackageFetcher
 
     val createPackageSearcher =
-        { fetcher: LocalPackageFetcher -> PackageSearcher(ResultFormatter(ColoringAgent(), FieldExtractor()), fetcher) }
+        { fetcher: LocalPackageFetcher ->
+            PackageSearcher(
+                ResultFormatter(ColorBasedFormatter(), FieldExtractor()),
+                fetcher
+            )
+        }
     beforeTest() {
         packageFetcher = LocalPackageFetcher()
     }
@@ -26,7 +31,7 @@ class PackageSearcherTest: StringSpec({
         val exception = shouldThrow<RuntimeException> {
             searcher.searchFor("")
         }
-        exception.message shouldBe "Cannot ar.coders.kacman.search a package with an empty name"
+        exception.message shouldBe "Cannot search a package with an empty name"
     }
 
     "searches package by name not found should inform that no package was found" {
@@ -47,7 +52,7 @@ community/httpie 2.3.0-3 (111.8 KiB 488.8 KiB) (Installed)
 }
 
 fun httpieResults(): String {
-    val formatter = ColoringAgent()
+    val formatter = ColorBasedFormatter()
     return """${formatter.formatName("\uD83D\uDC49 CURLIE \uD83D\uDC48")}
             |Repository: ${formatter.formatRepository("community")}
             |Description: The power of curl, the ease of use of httpie.

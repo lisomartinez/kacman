@@ -10,7 +10,7 @@ class ResultFormatter(private val formatter: FieldFormatter, private val fieldEx
     PackageFormatter {
 
     companion object {
-        fun createDefault() = ResultFormatter(ColoringAgent(), FieldExtractor())
+        fun createDefault() = ResultFormatter(ColorBasedFormatter(), FieldExtractor())
     }
 
     fun format(result: String): String {

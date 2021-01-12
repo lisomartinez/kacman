@@ -6,11 +6,11 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
 
 class ResultFormatterTest : StringSpec({
-    val agent: ColoringAgent = ColoringAgent()
+    val agent: ColorBasedFormatter = ColorBasedFormatter()
     lateinit var formatter: ResultFormatter
 
     beforeTest {
-        formatter = ResultFormatter(ColoringAgent(), FieldExtractor())
+        formatter = ResultFormatter(ColorBasedFormatter(), FieldExtractor())
     }
 
     "formats package name" {

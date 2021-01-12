@@ -14,10 +14,10 @@ const val ANSI_WHITE = "\u001B[37m"
 
 class ColoringAgentTest : StringSpec({
 
-    lateinit var agent: ColoringAgent
+    lateinit var agent: ColorBasedFormatter
 
     beforeTest {
-        agent = ColoringAgent()
+        agent = ColorBasedFormatter()
     }
 
 
