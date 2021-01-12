@@ -25,10 +25,12 @@ class FieldExtractor {
                 size = "0",
                 description = descriptionFrom(secondLine),
                 rating = ratingFrom(remainingOfFirstLine),
-                downloads = ""
+                downloads = downloadsFrom(remainingOfFirstLine)
             )
         }
     }
+
+    private fun downloadsFrom(remainingOfFirstLine: List<String>): String = remainingOfFirstLine[3]
 
     private fun ratingFrom(remainingOfFirstLine: List<String>): String = remainingOfFirstLine[2].drop(1)
 

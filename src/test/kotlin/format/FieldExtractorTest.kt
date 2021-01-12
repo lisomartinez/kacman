@@ -63,6 +63,14 @@ class FieldExtractorTest : StringSpec({
         val aurFields = fields as AurPackage
         aurFields.rating shouldBe "+0"
     }
+
+    "extract aur package downloads from search result lines" {
+        val lines = createAurSearchResultLines()
+        val fields: Package = extractor.extractFields(lines)
+        val aurFields = fields as AurPackage
+        aurFields.downloads shouldBe "0.00"
+    }
+
 })
 
 private fun createPacmanSearchResultLines(): List<String> {
