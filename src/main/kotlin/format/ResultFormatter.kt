@@ -1,8 +1,8 @@
 package format
 
 class ResultFormatter() {
-    val agent = ColoringAgent()
-    val fieldExtractor = FieldExtractor()
+    private val agent = ColoringAgent()
+    private val fieldExtractor = FieldExtractor()
     fun format(result: String): String {
         val packages = result.split("\n\n")
         return packages
