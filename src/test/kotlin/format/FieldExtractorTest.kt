@@ -42,8 +42,6 @@ class FieldExtractorTest : StringSpec({
 
 })
 
-private fun createPacmanSearchResultLines(): String {
-    return """community/curlie 1.6.0-1 (863.1 KiB 2.6 MiB) 
-    The power of curl, the ease of use of httpie.
-"""
+private fun createPacmanSearchResultLines(): List<String> {
+    return listOf("community/curlie 1.6.0-1 (863.1 KiB 2.6 MiB)", "The power of curl, the ease of use of httpie.")
 }

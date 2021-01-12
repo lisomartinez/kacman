@@ -3,10 +3,10 @@ package format
 
 class FieldExtractor {
 
-    fun extractFields(lines: String): Package {
-        val firstPartOfFirstLine = lines.split("/")[0]
-        val remainingOfFirstLine = lines.split("/")[1].split(" ")
-        val secondLine = lines.split("\n")[1]
+    fun extractFields(lines: List<String>): Package {
+        val firstPartOfFirstLine = lines[0].split("/")[0]
+        val remainingOfFirstLine = lines[0].split("/")[1].split(" ")
+        val secondLine = lines[1]
 
         return Package(
             repository = repositoryFrom(firstPartOfFirstLine),
