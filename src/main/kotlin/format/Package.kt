@@ -28,6 +28,10 @@ open class Package(
         return size
     }
 
+    fun isPacman(): Boolean {
+        return repository != Repository.AUR.asString
+    }
+
 }
 
 class AurPackage(

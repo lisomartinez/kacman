@@ -19,11 +19,20 @@ class ResultFormatter(private val formatter: FieldFormatter, private val fieldEx
     private fun isNotLastLine() = { list: List<String> -> list[0].isNotEmpty() && list[1].isNotEmpty() }
 
     private fun formatPackage(fields: Package, agent: FieldFormatter): String {
-        return "Name: ${fields.formattedName(agent)}\n" +
-                "Repository: ${fields.formattedRepository(agent)}\n" +
-                "Description: ${fields.formattedDescription(agent)}\n" +
-                "Version: ${fields.formattedVersion(agent)}\n" +
-                "Size: ${fields.formattedSize(agent)}"
+        return if (fields.isPacman()) {
+            "Name: ${fields.formattedName(agent)}\n" +
+                    "Repository: ${fields.formattedRepository(agent)}\n" +
+                    "Description: ${fields.formattedDescription(agent)}\n" +
+                    "Version: ${fields.formattedVersion(agent)}\n" +
+                    "Size: ${fields.formattedSize(agent)}"
+        } else {
+            "Name: ${fields.formattedName(agent)}\n" +
+                    "Repository: ${fields.formattedRepository(agent)}\n" +
+                    "Description: ${fields.formattedDescription(agent)}\n" +
+                    "Version: ${fields.formattedVersion(agent)}\n" +
+                    "Rating: ${(fields as AurPackage).rating}\n" +
+                    "Downloads: ${(fields as AurPackage).downloads}"
+        }
     }
 
 }
