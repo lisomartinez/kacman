@@ -1,6 +1,7 @@
 package format
 
-data class Package(
+
+open class Package(
     private val name: String,
     private val repository: String,
     private val description: String,
@@ -27,5 +28,15 @@ data class Package(
         return size
     }
 
-
 }
+
+class AurPackage(
+    name: String,
+    repository: String,
+    description: String,
+    version: String,
+    size: String,
+    val rating: String,
+    val downloads: String
+) :
+    Package(name, repository, description, version, "0")

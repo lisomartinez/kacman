@@ -39,9 +39,18 @@ class FieldExtractorTest : StringSpec({
         fields.formattedDescription(formatter) shouldBe "The power of curl, the ease of use of httpie."
     }
 
-
+    "extracts aur package description from search result lines" {
+        val lines = createAurSearchResultLines()
+        val fields: Package = extractor.extractFields(lines)
+        fields.formattedDescription(formatter) shouldBe "AWSv4 auth plugin for HTTPie"
+    }
 })
 
 private fun createPacmanSearchResultLines(): List<String> {
     return listOf("community/curlie 1.6.0-1 (863.1 KiB 2.6 MiB)", "The power of curl, the ease of use of httpie.")
+}
+
+private fun createAurSearchResultLines(): List<String> {
+    return listOf("aur/httpie-aws-authv4-git r22.6165193-1 (+0 0.00", "AWSv4 auth plugin for HTTPie")
+
 }

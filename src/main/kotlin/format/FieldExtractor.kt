@@ -7,14 +7,27 @@ class FieldExtractor {
         val firstPartOfFirstLine = getFirstPartOfFirstLine(lines)
         val remainingOfFirstLine = getRemainingPartOfFirstLine(lines)
         val secondLine = getSecondLine(lines)
-        println(lines)
-        return Package(
-            repository = repositoryFrom(firstPartOfFirstLine),
-            name = nameFrom(remainingOfFirstLine),
-            version = versionFrom(remainingOfFirstLine),
-            size = sizeFrom(remainingOfFirstLine),
-            description = descriptionFrom(secondLine)
-        )
+
+        val repository = repositoryFrom(firstPartOfFirstLine)
+        if (repository != Repository.AUR.asString) {
+            return Package(
+                repository = repository,
+                name = nameFrom(remainingOfFirstLine),
+                version = versionFrom(remainingOfFirstLine),
+                size = sizeFrom(remainingOfFirstLine),
+                description = descriptionFrom(secondLine)
+            )
+        } else {
+            return AurPackage(
+                repository = repository,
+                name = nameFrom(remainingOfFirstLine),
+                version = versionFrom(remainingOfFirstLine),
+                size = "0",
+                description = descriptionFrom(secondLine),
+                rating = "",
+                downloads = ""
+            )
+        }
     }
 
     private fun getRemainingPartOfFirstLine(lines: List<String>) =
