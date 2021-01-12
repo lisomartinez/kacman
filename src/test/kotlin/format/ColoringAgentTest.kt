@@ -21,38 +21,38 @@ class ColoringAgentTest : StringSpec({
 
 
     "coloring empty package name is empty" {
-        val coloredName: String = agent.colorName("")
+        val coloredName: String = agent.formatName("")
         coloredName shouldBe ""
     }
 
     "coloring package name with green" {
         val packageName = "wget"
-        val coloredName: String = agent.colorName(packageName)
+        val coloredName: String = agent.formatName(packageName)
         val name = "wget"
         coloredName shouldBe ofColorGreen(name)
     }
 
     "coloring 'core' repository with blue background color and black foreground" {
         val repository = "core"
-        val coloredRepository: String = agent.colorRepository(repository)
+        val coloredRepository: String = agent.formatRepository(repository)
         coloredRepository shouldBe ofBackgroundBlue(repository)
     }
 
     "coloring 'extra' repository with red background and black foreground" {
         val repository = "extra"
-        val coloredRepository: String = agent.colorRepository(repository)
+        val coloredRepository: String = agent.formatRepository(repository)
         coloredRepository shouldBe ofBackgroundRed(repository)
     }
 
     "coloring 'multilib' repository with magenta background and black foreground" {
         val repository = "multilib"
-        val coloredRepository: String = agent.colorRepository(repository)
+        val coloredRepository: String = agent.formatRepository(repository)
         coloredRepository shouldBe ofBackgroundMagenta(repository)
     }
 
     "coloring 'community' repository with cyan background and black foreground" {
         val repository = "community"
-        val coloredRepository: String = agent.colorRepository(repository)
+        val coloredRepository: String = agent.formatRepository(repository)
         coloredRepository shouldBe ofBackgroundWhite(repository)
     }
 })

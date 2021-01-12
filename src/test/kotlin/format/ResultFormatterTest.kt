@@ -6,48 +6,47 @@ import io.kotest.matchers.string.shouldContain
 
 class ResultFormatterTest : StringSpec({
     val agent: ColoringAgent = ColoringAgent()
+    lateinit var formatter: ResultFormatter
+
+    beforeTest {
+        formatter = ResultFormatter(ColoringAgent(), FieldExtractor())
+    }
 
     "formats package name" {
-        val formatter: ResultFormatter = ResultFormatter()
         val result = createPacmanSearchResultLines()
         val formattedResult: String = formatter.format(result)
-        formattedResult shouldContain "Name: ${agent.colorName("curlie")}"
+        formattedResult shouldContain "Name: ${agent.formatName("curlie")}"
     }
 
     "formats package version" {
-        val formatter: ResultFormatter = ResultFormatter()
         val result = createPacmanSearchResultLines()
         val formattedResult: String = formatter.format(result)
         formattedResult shouldContain "Version: 1.6.0-1"
     }
 
     "formats package description" {
-        val formatter: ResultFormatter = ResultFormatter()
         val result = createPacmanSearchResultLines()
         val formattedResult: String = formatter.format(result)
         formattedResult shouldContain "Description: The power of curl, the ease of use of httpie."
     }
 
     "formats package repository" {
-        val formatter: ResultFormatter = ResultFormatter()
         val result = createPacmanSearchResultLines()
         val formattedResult: String = formatter.format(result)
-        formattedResult shouldContain "Repository: ${agent.colorRepository("community")}"
+        formattedResult shouldContain "Repository: ${agent.formatRepository("community")}"
     }
 
     "formats package size" {
-        val formatter: ResultFormatter = ResultFormatter()
         val result = createPacmanSearchResultLines()
         val formattedResult: String = formatter.format(result)
         formattedResult shouldContain "Size: (863.1 KiB 2.6 MiB)"
     }
 
     "formats all fields of package" {
-        val formatter: ResultFormatter = ResultFormatter()
         val result = createPacmanSearchResultLines()
         val formattedResult: String = formatter.format(result)
-        formattedResult shouldBe """Name: ${agent.colorName("curlie")}
-            |Repository: ${agent.colorRepository("community")}
+        formattedResult shouldBe """Name: ${agent.formatName("curlie")}
+            |Repository: ${agent.formatRepository("community")}
             |Description: The power of curl, the ease of use of httpie.
             |Version: 1.6.0-1
             |Size: (863.1 KiB 2.6 MiB)
@@ -55,17 +54,16 @@ class ResultFormatterTest : StringSpec({
     }
 
     "formats multiple packages" {
-        val formatter: ResultFormatter = ResultFormatter()
         val result = createMultiplePacmanSearchResultLines()
         val formattedResult: String = formatter.format(result)
-        formattedResult shouldBe """Name: ${agent.colorName("curlie")}
-            |Repository: ${agent.colorRepository("community")}
+        formattedResult shouldBe """Name: ${agent.formatName("curlie")}
+            |Repository: ${agent.formatRepository("community")}
             |Description: The power of curl, the ease of use of httpie.
             |Version: 1.6.0-1
             |Size: (863.1 KiB 2.6 MiB)
             |
-            |Name: ${agent.colorName("httpie")}
-            |Repository: ${agent.colorRepository("community")}
+            |Name: ${agent.formatName("httpie")}
+            |Repository: ${agent.formatRepository("community")}
             |Description: cURL for humans
             |Version: 2.3.0-3
             |Size: (111.8 KiB 488.8 KiB)

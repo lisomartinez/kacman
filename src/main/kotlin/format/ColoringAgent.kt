@@ -2,10 +2,10 @@ package format
 
 import com.github.ajalt.mordant.terminal.TextColors.*
 
-class ColoringAgent {
-    fun colorName(title: String): String = green(title)
+class ColoringAgent : FieldFormatter{
+    override fun formatName(name: String): String = green(name)
 
-    fun colorRepository(repository: String): String {
+    override fun formatRepository(repository: String): String {
         return when(repository) {
             "core" -> (black on brightBlue)(repository)
             "extra" -> (black on red)(repository)

@@ -3,19 +3,22 @@ package format
 
 class FieldExtractor {
 
-    fun extractFields(lines: String): Map<Field, String> {
+    fun extractFields(lines: String): Package {
         val firstPartOfFirstLine = lines.split("/")[0]
         val remainingOfFirstLine = lines.split("/")[1].split(" ")
         val secondLine = lines.split("\n")[1]
 
-        return mapOf(
-            Field.REPOSITORY to repositoryFrom(firstPartOfFirstLine),
-            Field.NAME to nameFrom(remainingOfFirstLine),
-            Field.VERSION to versionFrom(remainingOfFirstLine),
-            Field.SIZE to sizeFrom(remainingOfFirstLine),
-            Field.DESCRIPTION to descriptionFrom(secondLine)
+        return Package(
+            repository = repositoryFrom(firstPartOfFirstLine),
+            name = nameFrom(remainingOfFirstLine),
+            version = versionFrom(remainingOfFirstLine),
+            size = sizeFrom(remainingOfFirstLine),
+            description = descriptionFrom(secondLine)
         )
     }
+
+
+
 
     private fun sizeFrom(firstLine: List<String>) = firstLine.slice(2..5).joinToString(" ")
 
