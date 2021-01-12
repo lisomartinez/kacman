@@ -30,7 +30,7 @@ class FieldExtractorTest : StringSpec({
     "extract package sizes from search result lines" {
         val lines = createPacmanSearchResultLines()
         val fields: Package = extractor.extractFields(lines)
-        fields.formattedSize(formatter) shouldBe "(863.1 KiB 2.6 MiB)"
+        (fields as PacmanPackage).size shouldBe "(863.1 KiB 2.6 MiB)"
     }
 
     "extracts package description from search result lines" {
@@ -61,14 +61,14 @@ class FieldExtractorTest : StringSpec({
         val lines = createAurSearchResultLines()
         val fields: Package = extractor.extractFields(lines)
         val aurFields = fields as AurPackage
-        aurFields.rating shouldBe "+0"
+        aurFields.formattedRating(formatter) shouldBe "+0"
     }
 
     "extract aur package downloads from search result lines" {
         val lines = createAurSearchResultLines()
         val fields: Package = extractor.extractFields(lines)
         val aurFields = fields as AurPackage
-        aurFields.downloads shouldBe "0.00"
+        aurFields.formattedDownloads(formatter) shouldBe "0.00"
     }
 
 })

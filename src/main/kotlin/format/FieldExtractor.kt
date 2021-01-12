@@ -10,7 +10,7 @@ class FieldExtractor {
 
         val repository = repositoryFrom(firstPartOfFirstLine)
         if (repository != Repository.AUR.asString) {
-            return Package(
+            return PacmanPackage(
                 repository = repository,
                 name = nameFrom(remainingOfFirstLine),
                 version = versionFrom(remainingOfFirstLine),
@@ -22,7 +22,6 @@ class FieldExtractor {
                 repository = repository,
                 name = nameFrom(remainingOfFirstLine),
                 version = versionFrom(remainingOfFirstLine),
-                size = "0",
                 description = descriptionFrom(secondLine),
                 rating = ratingFrom(remainingOfFirstLine),
                 downloads = downloadsFrom(remainingOfFirstLine)
