@@ -1,7 +1,6 @@
 package search
 
 import format.ColoringAgent
-import format.FieldExtractor
 import format.ResultFormatter
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec

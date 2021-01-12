@@ -1,4 +1,9 @@
-package format
+package search
+
+import format.AurPackage
+import format.Package
+import format.PacmanPackage
+import format.Repository
 
 
 class FieldExtractor {

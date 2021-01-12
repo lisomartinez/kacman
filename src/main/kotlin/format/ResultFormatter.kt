@@ -1,5 +1,7 @@
 package format
 
+import search.FieldExtractor
+
 private const val WITH_NEW_LINE = "\n\n"
 
 private const val TWO_LINES = 2

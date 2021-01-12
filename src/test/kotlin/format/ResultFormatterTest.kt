@@ -3,6 +3,7 @@ package format
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
+import search.FieldExtractor
 
 class ResultFormatterTest : StringSpec({
     val agent: ColoringAgent = ColoringAgent()

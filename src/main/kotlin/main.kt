@@ -1,6 +1,6 @@
 import format.ColoringAgent
-import format.FieldExtractor
 import format.ResultFormatter
+import search.FieldExtractor
 import search.PackageSearcher
 import search.RemotePackageFetcher
 
