@@ -55,6 +55,12 @@ class ColoringAgentTest : StringSpec({
         val coloredRepository: String = agent.formatRepository(repository)
         coloredRepository shouldBe ofBackgroundWhite(repository)
     }
+
+    "coloring 'aur' repository with cyan background and black foreground" {
+        val repository = "aur"
+        val coloredRepository: String = agent.formatRepository(repository)
+        coloredRepository shouldBe ofBackgroundWhite(repository)
+    }
 })
 
 private fun ofBackgroundWhite(repository: String) = "${ANSI_BLACK_ON_BRIGHT_WHITE}$repository${ANSI_DEFAUTLS}"

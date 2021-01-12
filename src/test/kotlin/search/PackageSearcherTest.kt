@@ -1,37 +1,64 @@
 package search
 
+import format.ColoringAgent
+import format.FieldExtractor
+import format.ResultFormatter
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
 class PackageSearcherTest: StringSpec({
-    "search package name in yay" {
-        val searcher: PackageSearcher = PackageSearcher()
+    lateinit var packageFetcher: LocalPackageFetcher
+
+    val createPackageSearcher =
+        { fetcher: LocalPackageFetcher -> PackageSearcher(ResultFormatter(ColoringAgent(), FieldExtractor()), fetcher) }
+    beforeTest() {
+        packageFetcher = LocalPackageFetcher()
+    }
+    "searches package by name in yay" {
+        val searcher: PackageSearcher = createPackageSearcher(packageFetcher)
+        loadPackages(packageFetcher)
         val results = searcher.searchFor("httpie")
         results shouldBe httpieResults()
     }
 
+    "searches package by empty name throws" {
+        val searcher: PackageSearcher = createPackageSearcher(packageFetcher)
+        val exception = shouldThrow<RuntimeException> {
+            searcher.searchFor("")
+        }
+        exception.message shouldBe "Cannot search a package with an empty name"
+    }
+
+    "searches package by name not found should inform that no package was found" {
+        val searcher: PackageSearcher = createPackageSearcher(packageFetcher)
+        val results = searcher.searchFor("httpie")
+        results shouldBe "No packages found!"
+    }
 
 })
 
-private fun httpieResults(): String {
-    return """aur/httpie-aws-authv4-git r22.6165193-1 (+0 0.00) 
-    AWSv4 auth plugin for HTTPie
-aur/batcli-git 0.0.1.r9.gcba1c6b-1 (+0 0.00) (Orphaned) 
-    Bat is a CLI cURL-like tool for humans inspired by Httpie and written in Go.
-aur/goploader-server 1.0-2 (+1 0.00) 
-    Easy file sharing with server-side encryption, curl/httpie/wget compliant
-aur/httpie-unixsocket-git r18.76d98b2-1 (+1 0.00) (Orphaned) 
-    UNIX socket transport plugin for HTTPie
-aur/httpie-ntlm 1.0.2-2 (+1 0.00) 
-    NTLM auth plugin for HTTPie
-aur/python-httpie-oauth 5.6cf6ed4-2 (+1 0.00) 
-    OAuth plugin for httpie
-aur/python-httpie-jwt-auth 0.4.0-1 (+2 0.53) 
-    JWTAuth (JSON Web Tokens) auth plugin for HTTPie
+private fun loadPackages(packageFetcher: LocalPackageFetcher) {
+    packageFetcher.packages = """community/curlie 1.6.0-1 (863.1 KiB 2.6 MiB) 
+    The power of curl, the ease of use of httpie.
 community/httpie 2.3.0-3 (111.8 KiB 488.8 KiB) (Installed)
     cURL for humans
-community/curlie 1.6.0-1 (863.1 KiB 2.6 MiB) 
-    The power of curl, the ease of use of httpie.
 
 """
+}
+
+fun httpieResults(): String {
+    val formatter = ColoringAgent()
+    return """Name: ${formatter.formatName("curlie")}
+            |Repository: ${formatter.formatRepository("community")}
+            |Description: The power of curl, the ease of use of httpie.
+            |Version: 1.6.0-1
+            |Size: (863.1 KiB 2.6 MiB)
+            |
+            |Name: ${formatter.formatName("httpie")}
+            |Repository: ${formatter.formatRepository("community")}
+            |Description: cURL for humans
+            |Version: 2.3.0-3
+            |Size: (111.8 KiB 488.8 KiB)
+        """.trimMargin()
 }

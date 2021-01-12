@@ -1,8 +1,11 @@
+import format.ColoringAgent
+import format.FieldExtractor
+import format.ResultFormatter
+import search.PackageSearcher
+import search.RemotePackageFetcher
+
 fun main(args: Array<String>) {
-    println("Hello World!")
-    val exec = Runtime.getRuntime().exec("yay -Ss")
-    exec.inputStream.reader(Charsets.UTF_8).use {
-        println(it.readText())
-    }
-    exec.waitFor()
+    val resultFormatter = ResultFormatter(ColoringAgent(), FieldExtractor())
+    val searcher = PackageSearcher(resultFormatter, RemotePackageFetcher())
+    println(searcher.searchFor("httpie"))
 }

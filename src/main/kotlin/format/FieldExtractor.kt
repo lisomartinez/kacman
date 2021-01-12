@@ -7,7 +7,7 @@ class FieldExtractor {
         val firstPartOfFirstLine = getFirstPartOfFirstLine(lines)
         val remainingOfFirstLine = getRemainingPartOfFirstLine(lines)
         val secondLine = getSecondLine(lines)
-
+        println(lines)
         return Package(
             repository = repositoryFrom(firstPartOfFirstLine),
             name = nameFrom(remainingOfFirstLine),
