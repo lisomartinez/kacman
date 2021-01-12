@@ -9,6 +9,10 @@ private const val TWO_LINES = 2
 class ResultFormatter(private val formatter: FieldFormatter, private val fieldExtractor: FieldExtractor) :
     PackageFormatter {
 
+    companion object {
+        fun createDefault() = ResultFormatter(ColoringAgent(), FieldExtractor())
+    }
+
     fun format(result: String): String {
         val packages = result.lineSequence()
             .windowed(TWO_LINES, TWO_LINES)

@@ -16,7 +16,7 @@ class ResultFormatterTest : StringSpec({
     "formats package name" {
         val result = createPacmanSearchResultLines()
         val formattedResult: String = formatter.format(result)
-        formattedResult shouldContain "${agent.formatName("\uD83D\uDC49 CURLIE \uD83D\uDC48")}"
+        formattedResult shouldContain agent.formatName("\uD83D\uDC49 CURLIE \uD83D\uDC48")
     }
 
     "formats package version" {

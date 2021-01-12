@@ -3,6 +3,11 @@ package ar.coders.kacman.search
 import ar.coders.kacman.format.ResultFormatter
 
 class PackageSearcher(private val resultFormatter: ResultFormatter, private val packageFetcher: PackageFetcher) {
+
+    companion object {
+        fun createDefault() = PackageSearcher(ResultFormatter.createDefault(), RemotePackageFetcher())
+    }
+
     fun searchFor(packageName: String): String {
         assertPackageNameIsPresent(packageName)
         val packages = packageFetcher.fetchPackagesFro(packageName)
