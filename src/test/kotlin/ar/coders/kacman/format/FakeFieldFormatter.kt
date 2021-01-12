@@ -1,4 +1,4 @@
-package format
+package ar.coders.kacman.format
 
 class FakeFieldFormatter : FieldFormatter {
     override fun formatName(name: String): String {

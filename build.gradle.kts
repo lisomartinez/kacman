@@ -1,7 +1,9 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.4.10"
+    id("com.github.johnrengelman.shadow") version "6.1.0"
     application
 }
 
@@ -10,6 +12,7 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 val kotestVersion: String by project
@@ -31,4 +34,15 @@ tasks.withType<KotlinCompile>() {
 
 application {
     mainClassName = "MainKt"
+}
+
+
+tasks {
+    named<ShadowJar>("shadowJar") {
+        archiveBaseName.set("kacman")
+        mergeServiceFiles()
+        manifest {
+            attributes(mapOf("Main-Class" to "ar.coders.kacman.main"))
+        }
+    }
 }

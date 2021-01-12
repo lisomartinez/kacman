@@ -1,7 +1,7 @@
-package search
+package ar.coders.kacman.search
 
-import format.ColoringAgent
-import format.ResultFormatter
+import ar.coders.kacman.format.ColoringAgent
+import ar.coders.kacman.format.ResultFormatter
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
@@ -26,7 +26,7 @@ class PackageSearcherTest: StringSpec({
         val exception = shouldThrow<RuntimeException> {
             searcher.searchFor("")
         }
-        exception.message shouldBe "Cannot search a package with an empty name"
+        exception.message shouldBe "Cannot ar.coders.kacman.search a package with an empty name"
     }
 
     "searches package by name not found should inform that no package was found" {
@@ -48,13 +48,13 @@ community/httpie 2.3.0-3 (111.8 KiB 488.8 KiB) (Installed)
 
 fun httpieResults(): String {
     val formatter = ColoringAgent()
-    return """Name: ${formatter.formatName("curlie")}
+    return """${formatter.formatName("\uD83D\uDC49 CURLIE \uD83D\uDC48")}
             |Repository: ${formatter.formatRepository("community")}
             |Description: The power of curl, the ease of use of httpie.
             |Version: 1.6.0-1
             |Size: (863.1 KiB 2.6 MiB)
             |
-            |Name: ${formatter.formatName("httpie")}
+            |${formatter.formatName("\uD83D\uDC49 HTTPIE \uD83D\uDC48")}
             |Repository: ${formatter.formatRepository("community")}
             |Description: cURL for humans
             |Version: 2.3.0-3

@@ -1,4 +1,4 @@
-package format
+package ar.coders.kacman.format
 
 
 enum class Repository(val asString: String) {

@@ -1,6 +1,6 @@
-package format
+package ar.coders.kacman.format
 
-import search.FieldExtractor
+import ar.coders.kacman.search.FieldExtractor
 
 private const val WITH_NEW_LINE = "\n\n"
 
@@ -26,7 +26,7 @@ class ResultFormatter(private val formatter: FieldFormatter, private val fieldEx
     }
 
     override fun format(extractedPackage: PacmanPackage): String {
-        return "Name: ${extractedPackage.formattedName(formatter)}\n" +
+        return "${extractedPackage.formattedName(formatter)}\n" +
                 "Repository: ${extractedPackage.formattedRepository(formatter)}\n" +
                 "Description: ${extractedPackage.formattedDescription(formatter)}\n" +
                 "Version: ${extractedPackage.formattedVersion(formatter)}\n" +
@@ -34,7 +34,7 @@ class ResultFormatter(private val formatter: FieldFormatter, private val fieldEx
     }
 
     override fun format(extractedPackage: AurPackage): String {
-        return "Name: ${extractedPackage.formattedName(formatter)}\n" +
+        return "${extractedPackage.formattedName(formatter)}\n" +
                 "Repository: ${extractedPackage.formattedRepository(formatter)}\n" +
                 "Description: ${extractedPackage.formattedDescription(formatter)}\n" +
                 "Version: ${extractedPackage.formattedVersion(formatter)}\n" +

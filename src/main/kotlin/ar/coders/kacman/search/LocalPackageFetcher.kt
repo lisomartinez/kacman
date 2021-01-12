@@ -1,4 +1,4 @@
-package search
+package ar.coders.kacman.search
 
 class LocalPackageFetcher : PackageFetcher {
     var packages: String = ""

@@ -1,4 +1,4 @@
-package format
+package ar.coders.kacman.format
 
 interface FieldFormatter {
     fun formatName(name: String): String

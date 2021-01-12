@@ -1,9 +1,9 @@
-package search
+package ar.coders.kacman.search
 
-import format.AurPackage
-import format.Package
-import format.PacmanPackage
-import format.Repository
+import ar.coders.kacman.format.AurPackage
+import ar.coders.kacman.format.Package
+import ar.coders.kacman.format.PacmanPackage
+import ar.coders.kacman.format.Repository
 
 
 class FieldExtractor {

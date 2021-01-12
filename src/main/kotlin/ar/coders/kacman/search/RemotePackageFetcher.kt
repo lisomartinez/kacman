@@ -1,4 +1,4 @@
-package search
+package ar.coders.kacman.search
 
 class RemotePackageFetcher : PackageFetcher {
     override fun fetchPackagesFro(packageName: String): String {

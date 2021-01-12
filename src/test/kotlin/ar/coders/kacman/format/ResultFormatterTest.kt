@@ -1,9 +1,9 @@
-package format
+package ar.coders.kacman.format
 
+import ar.coders.kacman.search.FieldExtractor
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
-import search.FieldExtractor
 
 class ResultFormatterTest : StringSpec({
     val agent: ColoringAgent = ColoringAgent()
@@ -16,7 +16,7 @@ class ResultFormatterTest : StringSpec({
     "formats package name" {
         val result = createPacmanSearchResultLines()
         val formattedResult: String = formatter.format(result)
-        formattedResult shouldContain "Name: ${agent.formatName("curlie")}"
+        formattedResult shouldContain "${agent.formatName("\uD83D\uDC49 CURLIE \uD83D\uDC48")}"
     }
 
     "formats package version" {
@@ -46,7 +46,7 @@ class ResultFormatterTest : StringSpec({
     "formats all fields of package" {
         val result = createPacmanSearchResultLines()
         val formattedResult: String = formatter.format(result)
-        formattedResult shouldBe """Name: ${agent.formatName("curlie")}
+        formattedResult shouldBe """${agent.formatName("\uD83D\uDC49 CURLIE \uD83D\uDC48")}
             |Repository: ${agent.formatRepository("community")}
             |Description: The power of curl, the ease of use of httpie.
             |Version: 1.6.0-1
@@ -57,13 +57,13 @@ class ResultFormatterTest : StringSpec({
     "formats multiple packages" {
         val result = createMultiplePacmanSearchResultLines()
         val formattedResult: String = formatter.format(result)
-        formattedResult shouldBe """Name: ${agent.formatName("curlie")}
+        formattedResult shouldBe """${agent.formatName("\uD83D\uDC49 CURLIE \uD83D\uDC48")}
             |Repository: ${agent.formatRepository("community")}
             |Description: The power of curl, the ease of use of httpie.
             |Version: 1.6.0-1
             |Size: (863.1 KiB 2.6 MiB)
             |
-            |Name: ${agent.formatName("httpie")}
+            |${agent.formatName("\uD83D\uDC49 HTTPIE \uD83D\uDC48")}
             |Repository: ${agent.formatRepository("community")}
             |Description: cURL for humans
             |Version: 2.3.0-3

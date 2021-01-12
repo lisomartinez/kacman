@@ -1,4 +1,4 @@
-package format
+package ar.coders.kacman.format
 
 
 abstract class Package(
@@ -8,7 +8,7 @@ abstract class Package(
     private val version: String
 ) {
     fun formattedName(formatter: FieldFormatter): String {
-        return formatter.formatName(name)
+        return formatter.formatName("\uD83D\uDC49 " + name.toUpperCase() + " \uD83D\uDC48")
     }
 
     fun formattedRepository(formatter: FieldFormatter): String {
